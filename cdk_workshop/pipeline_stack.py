@@ -26,11 +26,12 @@ class WorkshopPipelineStack(Stack):
                 commands=[
                     "npm install -g aws-cdk", # Installs the cdk cli on Codebuild
                     "pip install -r requirements.txt", # Instructs Codebuild to install required packages
-                    'cdk synth'
+                    'npx cdk synth'
                           ]
         
             )
         )
+        # Adding a Stage to the pipline process 
         deploy = WorkshopPipelineStage(self, 'Deploy')
         deploy_stage = pipeline.add_stage(deploy)
             
