@@ -2,6 +2,7 @@ from aws_cdk import Stack
 from aws_cdk import aws_codecommit as codecommit
 from aws_cdk import pipelines as pipelines
 from constructs import Construct
+
 from cdk_workshop.pipeline_stage import WorkshopPipelineStage
 
 
