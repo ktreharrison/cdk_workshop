@@ -1,6 +1,6 @@
 from aws_cdk import Stack
 from aws_cdk import aws_codecommit as codecommit
-from aws_cdk import aws_codepipeline as pipelines
+from aws_cdk import pipelines as pipelines
 from constructs import Construct
 
 
