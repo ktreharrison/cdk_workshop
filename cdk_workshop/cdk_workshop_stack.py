@@ -1,5 +1,4 @@
-from aws_cdk import Stack
-from aws_cdk import CfnOutput
+from aws_cdk import CfnOutput, Stack
 from aws_cdk import aws_apigateway as apigw
 from aws_cdk import aws_lambda as _lambda
 from cdk_dynamo_table_view import TableViewer
