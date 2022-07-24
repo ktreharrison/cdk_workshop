@@ -8,6 +8,16 @@ from .hitcounter import HitCounter
 
 
 class CdkWorkshopStack(Stack):
+    
+    @property
+    def hc_endpoint(self):
+        return self._hc_endpoint
+    
+    
+    @property
+    def hc_viewer_url(self):
+        return self._hc_viewer_url
+    
     # boilerplat code for Python CDK
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
@@ -28,12 +38,24 @@ class CdkWorkshopStack(Stack):
         )
         
         # Define an API Gateway resource 
-        apigw.LambdaRestApi(self, "Endpoint", handler=hello_with_counter._handler)
+        gateway = apigw.LambdaRestApi(self, "Endpoint", handler=hello_with_counter._handler)
         
         # Using the aws cdk ddb table viewer
-        TableViewer(
+        tv = TableViewer(
             self, 'ViewHitCounter',
             title='Hello Hits',
             table=hello_with_counter.table,
             sort_by='-hits'
+        )
+        
+        self._hc_endpoint = CfnOutput(
+            self, 
+            'GatwayUrl',
+            value=gateway.url
+        )
+        self._hc_viewer_url = CfnOutput(
+            self,
+            'TableViewerUrl',
+            value=tv.endpoint
+            
         )
